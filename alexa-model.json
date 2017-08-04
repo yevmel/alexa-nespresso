@@ -1,0 +1,153 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "Cart",
+      "samples": [
+        "Was habe ich bisher",
+        "Was haben wir bisher",
+        "Was steht auf der Einkaufsliste",
+        "wieweit sind wir",
+        "wie sieht es aus",
+        "was haben wir im Einkaufswagen",
+        "was habe ich im Einkaufswagen"
+      ],
+      "slots": []
+    },
+    {
+      "name": "Checkout",
+      "samples": [
+        "Bestellung abschliessen",
+        "ich möchte die Bestellung abschliessen",
+        "Bestellung abschicken",
+        "ich möchte die Bestellung abschicken",
+        "ich bin fertig",
+        "los",
+        "abschliessen"
+      ],
+      "slots": []
+    },
+    {
+      "name": "Item",
+      "samples": [
+        "ich möchte {anzahl} Kapseln {geschmacksrichtung} bestellen",
+        "Bitte {anzahl} Kapseln vom Typ {geschmacksrichtung} bestellen",
+        "ich will Kaffee bestellen",
+        "ich will {geschmacksrichtung} bestellen",
+        "{anzahl} Kapseln {geschmacksrichtung}",
+        "{anzahl} Kapseln"
+      ],
+      "slots": [
+        {
+          "name": "anzahl",
+          "type": "AMAZON.NUMBER",
+          "samples": [
+            "{anzahl} Kapseln",
+            "{anzahl}"
+          ]
+        },
+        {
+          "name": "geschmacksrichtung",
+          "type": "Geschmacksrichtung",
+          "samples": [
+            "{geschmacksrichtung}",
+            "{geschmacksrichtung} bestellen"
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Geschmacksrichtung",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Roma",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Ristretto",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Arpeggio",
+            "synonyms": []
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-Item.IntentSlot-anzahl",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Wie viele Kapseln soll ich bestellen?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-Item.IntentSlot-geschmacksrichtung",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Welche Geschmacksrichtung soll ich bestellen?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "Item",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "anzahl",
+            "type": "AMAZON.NUMBER",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-Item.IntentSlot-anzahl"
+            }
+          },
+          {
+            "name": "geschmacksrichtung",
+            "type": "Geschmacksrichtung",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-Item.IntentSlot-geschmacksrichtung"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
